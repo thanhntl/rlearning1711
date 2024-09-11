@@ -1,0 +1,10 @@
+# https://rpubs.com/tf_peterson/readxl_import
+library(readxl)
+library(plyr)
+library(janitor)
+
+inp <- "path/to/file"
+sheets <- excel_sheets(inp)
+l <- lapply(sheets, function(x) read_excel(inp, sheet = x))
+df <- rbind.fill(l)
+df <- clean_names(df)
